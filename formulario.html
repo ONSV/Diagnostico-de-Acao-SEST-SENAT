@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autoavaliação Municipal ONSV</title>
+    <link rel="stylesheet" href="form-style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="imagens/logo_observatorio-1.png" alt="Logo ONSV">
+                <span>Autoavaliação Municipal <strong>ONSV</strong></span>
+            </a>
+        </div>
+    </header>
+
+    <main class="form-page">
+        <div class="container form-container">
+            
+            <div class="alert alert-success">
+                <i class="fas fa-check-circle"></i> <strong>Sistema de Proteção Ativo:</strong> O banco de dados agora possui proteção total contra dados incompletos. Avaliações com campos vazios serão automaticamente rejeitadas, garantindo a integridade dos dados.
+            </div>
+
+            <div class="alert alert-warning">
+                <i class="fas fa-exclamation-triangle"></i> <strong>Atenção:</strong> Todos os campos marcados com * são obrigatórios e protegidos por constraints de banco. O sistema impedirá automaticamente o salvamento se algum campo crítico estiver vazio.
+            </div>
+
+            <div class="form-header">
+                <div class="header-icon">
+                    <i class="fas fa-city"></i>
+                </div>
+                <h1>Dados</h1>
+                <p>Preencha todos os dados básicos para iniciar a autoavaliação.</p>
+            </div>
+
+            <form action="#" method="POST" id="municipio-form">
+                <fieldset>
+                    <div class="form-section-header">
+                        <i class="fas fa-info-circle"></i>
+                        <h3>Dados Iniciais</h3>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="nome"><i class="fas fa-user"></i> Nome Completo * <span class="required">OBRIGATÓRIO</span></label>
+                        <input type="text" id="nome" name="nome" placeholder="Insira seu nome completo" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cpf"><i class="fas fa-id-card"></i> CPF (Apenas Números) *</label>
+                        <input type="text" id="cpf" name="cpf" placeholder="Insira seu CPF" required>
+                    </div>
+                    
+                    <div class="form-group-split">
+                         <div class="form-group">
+                            <label for="municipio"><i class="fas fa-map-marker-alt"></i> Município (Por extenso) *</label>
+                            <input type="text" id="municipio" name="municipio" placeholder="Nome completo do município" required>
+                            <p class="form-text-observation">Observação: Escreva o nome do município SEM acento, com letras minúsculas.</p>
+                    </div>
+                        <div class="form-group">
+                            <label for="estado"><i class="fas fa-globe"></i> Estado/UF *</label>
+                            <select id="estado" name="estado" required>
+                                <option value="" disabled selected>Selecione o estado</option>
+                                <option value="AC">Acre</option>
+                                <option value="AL">Alagoas</option>
+                                <option value="AP">Amapá</option>
+                                <option value="AM">Amazonas</option>
+                                <option value="BA">Bahia</option>
+                                <option value="CE">Ceará</option>
+                                <option value="DF">Distrito Federal</option>
+                                <option value="ES">Espírito Santo</option>
+                                <option value="GO">Goiás</option>
+                                <option value="MA">Maranhão</option>
+                                <option value="MT">Mato Grosso</option>
+                                <option value="MS">Mato Grosso do Sul</option>
+                                <option value="MG">Minas Gerais</option>
+                                <option value="PA">Pará</option>
+                                <option value="PB">Paraíba</option>
+                                <option value="PR">Paraná</option>
+                                <option value="PE">Pernambuco</option>
+                                <option value="PI">Piauí</option>
+                                <option value="RJ">Rio de Janeiro</option>
+                                <option value="RN">Rio Grande do Norte</option>
+                                <option value="RS">Rio Grande do Sul</option>
+                                <option value="RO">Rondônia</option>
+                                <option value="RR">Roraima</option>
+                                <option value="SC">Santa Catarina</option>
+                                <option value="SP">São Paulo</option>
+                                <option value="SE">Sergipe</option>
+                                <option value="TO">Tocantins</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    </fieldset>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="btn-voltar"><i class="fas fa-arrow-left"></i> Voltar</button>
+                    <button type="submit" class="btn btn-primary">Continuar <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </form>
+            
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
