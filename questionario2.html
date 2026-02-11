@@ -1,194 +1,352 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Questionário de Segurança Viária - ONSV</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        :root { --primary-color: #007bff; --background-light: #f4f7f6; --background-white: #ffffff; --text-dark: #343a40; --border-color: #e9ecef; --border-radius-lg: 12px; --border-radius-md: 8px; --box-shadow-light: 0 4px 12px rgba(0, 0, 0, 0.05); }
-        body { font-family: 'Inter', sans-serif; background: var(--background-light); padding: 24px; display: flex; align-items: center; justify-content: center; }
-        .container-principal { width: 100%; max-width: 1024px; background: var(--background-white); border-radius: var(--border-radius-lg); box-shadow: var(--box-shadow-light); overflow: hidden; }
-        .progresso-header { background: var(--primary-color); color: #fff; padding: 20px 30px; }
-        .progresso-header h2 { margin: 0; font-weight: 600; font-size: 1.6rem; text-align: center; }
-        #autoavaliacao-form { padding: 30px; }
-        .pergunta { margin: 25px 0; padding: 20px; border: 1px solid var(--border-color); border-radius: var(--border-radius-md); }
-        .pergunta h4 { margin: 0 0 12px; font-size: 1.15rem; color: var(--text-dark); font-weight: 500; }
-        .opcoes-resposta label { display: flex; gap: 12px; align-items: center; padding: 14px; border: 1px solid var(--border-color); border-radius: var(--border-radius-md); margin: 10px 0; cursor: pointer; }
-        .opcoes-resposta input[type="radio"] { min-width: 18px; min-height: 18px; accent-color: var(--primary-color); }
-        .btn-submit { width: 100%; padding: 14px 25px; border: none; border-radius: var(--border-radius-md); font-weight: 600; cursor: pointer; font-size: 1rem; background: var(--primary-color); color: #fff; margin-top: 30px; }
-        .btn-submit:disabled { background: #6c757d; cursor: not-allowed; }
+        :root {
+            --primary-color: #007bff;
+            --background-light: #f4f7f6;
+            --background-white: #ffffff;
+            --text-dark: #343a40;
+            --border-color: #e9ecef;
+            --border-radius-lg: 12px;
+            --border-radius-md: 8px;
+            --box-shadow-light: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--background-light);
+            padding: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container-principal {
+            width: 100%;
+            max-width: 1024px;
+            background: var(--background-white);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--box-shadow-light);
+            overflow: hidden;
+        }
+
+        .progresso-header {
+            background: var(--primary-color);
+            color: #fff;
+            padding: 20px 30px;
+        }
+
+        .progresso-header h2 {
+            margin: 0;
+            font-weight: 600;
+            font-size: 1.6rem;
+            text-align: center;
+        }
+
+        #autoavaliacao-form {
+            padding: 30px;
+        }
+
+        .pergunta {
+            margin: 25px 0;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-md);
+        }
+
+        .pergunta h4 {
+            margin: 0 0 12px;
+            font-size: 1.15rem;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .opcoes-resposta label {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            padding: 14px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-md);
+            margin: 10px 0;
+            cursor: pointer;
+        }
+
+        .opcoes-resposta input[type="radio"] {
+            min-width: 18px;
+            min-height: 18px;
+            accent-color: var(--primary-color);
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 14px 25px;
+            border: none;
+            border-radius: var(--border-radius-md);
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 1rem;
+            background: var(--primary-color);
+            color: #fff;
+            margin-top: 30px;
+        }
+
+        .btn-submit:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+        }
     </style>
 </head>
+
 <body>
 
-<div class="container-principal">
-    <header class="progresso-header">
-        <h2>Autoavaliação de Segurança Viária</h2>
-    </header>
-    
-    <form id="autoavaliacao-form" method="POST">
-        <h1 class="text-2xl md:text-3xl font-bold text-center text-gray-800 mb-2">Questionário Pós-Ação</h1>
-        <p class="text-center text-gray-600 mb-8">Teste seus conhecimentos sobre a segurança no trânsito no Brasil.</p>
+    <div class="container-principal">
+        <header class="progresso-header">
+            <h2>Autoavaliação de Segurança Viária</h2>
+        </header>
 
-        <div class="pergunta" data-question="q1">
-            <h4 class="font-semibold text-lg text-gray-700 mb-3">1. Qual é o principal fator de risco associado à ocorrência de sinistros fatais no Brasil?</h4>
-            <div class="opcoes-resposta">
-                <label><input type="radio" name="q1" value="falta-sinalizacao" required><span>Falta de sinalização</span></label>
-                <label><input type="radio" name="q1" value="excesso-velocidade"><span>Excesso de velocidade</span></label>
-                <label><input type="radio" name="q1" value="chuva"><span>Chuva</span></label>
-            </div>
-        </div>
-        <div class="pergunta" data-question="q2">
-            <h4 class="font-semibold text-lg text-gray-700 mb-3">2. Entre os motociclistas, qual comportamento aumenta mais o risco de morte?</h4>
-            <div class="opcoes-resposta">
-                <label><input type="radio" name="q2" value="nao-usar-capacete" required><span>Não usar capacete</span></label>
-                <label><input type="radio" name="q2" value="acima-60"><span>Pilotar acima de 60km/h</span></label>
-                <label><input type="radio" name="q2" value="usar-celular"><span>Usar o celular durante a pilotagem</span></label>
-            </div>
-        </div>
-        <div class="pergunta" data-question="q3">
-            <h4 class="font-semibold text-lg text-gray-700 mb-3">3. A redução de 5% na velocidade média das vias pode resultar em:</h4>
-            <div class="opcoes-resposta">
-                <label><input type="radio" name="q3" value="nenhum-impacto" required><span>Nenhum impacto relevante</span></label>
-                <label><input type="radio" name="q3" value="reducao-10"><span>Redução de 10% nas colisões fatais</span></label>
-                <label><input type="radio" name="q3" value="reducao-20"><span>Redução de 20% nas colisões fatais</span></label>
-            </div>
-        </div>
-        <div class="pergunta" data-question="q4">
-            <h4 class="font-semibold text-lg text-gray-700 mb-3">4. O uso do cinto de segurança no banco traseiro reduz em quanto o risco de morte?</h4>
-            <div class="opcoes-resposta">
-                <label><input type="radio" name="q4" value="25" required><span>25%</span></label>
-                <label><input type="radio" name="q4" value="45"><span>45%</span></label>
-                <label><input type="radio" name="q4" value="75"><span>75%</span></label>
-            </div>
-        </div>
-        <div class="pergunta" data-question="q5">
-            <h4 class="font-semibold text-lg text-gray-700 mb-3">5. Qual medida é mais eficaz para proteger pedestres em áreas urbanas?</h4>
-            <div class="opcoes-resposta">
-                <label><input type="radio" name="q5" value="mais-semaforos" required><span>Mais semáforos</span></label>
-                <label><input type="radio" name="q5" value="reducao-30kmh"><span>Redução dos limites de velocidade para 30 km/h</span></label>
-                <label><input type="radio" name="q5" value="pintura-faixas"><span>Pintura de faixas de pedestre</span></label>
-            </div>
-        </div>
-        <div class="pergunta" data-question="q6">
-            <h4 class="font-semibold text-lg text-gray-700 mb-3">6. De acordo com a OMS, sinistros de trânsito causam mais mortes no mundo do que:</h4>
-            <div class="opcoes-resposta">
-                <label><input type="radio" name="q6" value="malaria" required><span>Malária</span></label>
-                <label><input type="radio" name="q6" value="tuberculose"><span>Tuberculose</span></label>
-                <label><input type="radio" name="q6" value="ambos"><span>Ambos</span></label>
-            </div>
-        </div>
-        <div class="pergunta" data-question="q7">
-            <h4 class="font-semibold text-lg text-gray-700 mb-3">7. Qual porcentagem dos custos dos sinistros de trânsito é suportada pelo sistema público de saúde?</h4>
-            <div class="opcoes-resposta">
-                <label><input type="radio" name="q7" value="menos-20" required><span>Menos de 20%</span></label>
-                <label><input type="radio" name="q7" value="aprox-50"><span>Aproximadamente 50%</span></label>
-                <label><input type="radio" name="q7" value="mais-70"><span>Mais de 70%</span></label>
-            </div>
-        </div>
-        <div class="pergunta" data-question="q8">
-            <h4 class="font-semibold text-lg text-gray-700 mb-3">8. Em média, o uso de celular ao volante multiplica o risco de acidente em:</h4>
-            <div class="opcoes-resposta">
-                <label><input type="radio" name="q8" value="2-vezes" required><span>2 vezes</span></label>
-                <label><input type="radio" name="q8" value="3-vezes"><span>3 vezes</span></label>
-                <label><input type="radio" name="q8" value="5-vezes"><span>5 vezes</span></label>
-            </div>
-        </div>
-        <div class="pergunta" data-question="q9">
-             <h4 class="font-semibold text-lg text-gray-700 mb-3">9. A política conhecida como “Visão Zero” tem como objetivo:</h4>
-            <div class="opcoes-resposta">
-                <label><input type="radio" name="q9" value="reduzir-50" required><span>Reduzir em 50% as mortes no trânsito até 2030</span></label>
-                <label><input type="radio" name="q9" value="eliminar-mortes"><span>Eliminar completamente as mortes e lesões graves no trânsito</span></label>
-                <label><input type="radio" name="q9" value="investir-hospitais"><span>Investir apenas em hospitais para tratar vítimas</span></label>
-            </div>
-        </div>
-        <div class="pergunta" data-question="q10">
-            <h4 class="font-semibold text-lg text-gray-700 mb-3">10. Em uma via cuja velocidade máxima permitida é de 80 km/h, durante um período de chuva, qual deve ser a conduta correta do motorista?</h4>
-            <div class="opcoes-resposta">
-                <label><input type="radio" name="q10" value="aumentar-velocidade" required><span>Aumentar a velocidade para atravessar o trecho de chuva mais rapidamente</span></label>
-                <label><input type="radio" name="q10" value="manter-velocidade"><span>Manter a velocidade máxima da via, respeitando apenas o limite indicado na placa.</span></label>
-                <label><input type="radio" name="q10" value="reduzir-velocidade-chuva"><span>Reduzir a velocidade do veículo, adequando a condução às condições adversas da via.</span></label>
-            </div>
-        </div>
+        <form id="autoavaliacao-form" method="POST">
+            <h1 class="text-2xl md:text-3xl font-bold text-center text-gray-800 mb-2">Questionário Pós-Ação</h1>
+            <p class="text-center text-gray-600 mb-8">Teste seus conhecimentos sobre a segurança no trânsito no Brasil.
+            </p>
 
-        <div class="pergunta">
-            <h4 class="font-semibold text-lg text-gray-700 mb-3">11. O que você considera mais importante para termos um trânsito seguro nos próximos 10 anos?</h4>
-            <div><textarea name="respostaQ11" id="q11" rows="4" class="w-full p-3 border rounded-lg" placeholder="Digite sua resposta aqui..." required></textarea></div>
-        </div>
+            <div class="pergunta" data-question="q1">
+                <h4 class="font-semibold text-lg text-gray-700 mb-3">1. Qual é o principal fator de risco associado à
+                    maior gravidade dos sinistros de trânsito no Brasil?</h4>
+                <div class="opcoes-resposta">
+                    <label><input type="radio" name="q1" value="falta-manut" required><span>Falta de manutenção dos
+                            veículos</span></label>
+                    <label><input type="radio" name="q1" value="consv_vias"><span>Má conservação das vias</span></label>
+                    <label><input type="radio" name="q1" value="celular"><span>Uso do celular ao volante</span></label>
+                    <label><input type="radio" name="q1" value="exce_vel"><span>Excesso de velocidade</span></label>
+                    <label><input type="radio" name="q1" value="sinal"><span>Ausência de sinalização
+                            vertical</span></label>
+                </div>
+            </div>
+            <div class="pergunta" data-question="q2">
+                <h4 class="font-semibold text-lg text-gray-700 mb-3">2. Segundo a abordagem de Sistema Seguro, a
+                    responsabilidade pela segurança no trânsito deve ser:</h4>
+                <div class="opcoes-resposta">
+                    <label><input type="radio" name="q2" value="cond" required><span>Exclusivamente do
+                            condutor</span></label>
+                    <label><input type="radio" name="q2" value="pod_pub"><span>Apenas do poder público</span></label>
+                    <label><input type="radio" name="q2" value="forc_fisc"><span>Apenas das forças de
+                            fiscalização</span></label>
+                    <label><input type="radio" name="q2" value="vitimas"><span>Transferida para as
+                            vítimas</span></label>
+                    <label><input type="radio" name="q2" value="comparti"><span>Compartilhada entre vias, veículos,
+                            velocidades, usuários e gestão</span></label>
+                </div>
+            </div>
+            <div class="pergunta" data-question="q3">
+                <h4 class="font-semibold text-lg text-gray-700 mb-3">3. Pedestres, ciclistas e motociclistas são
+                    considerados usuários vulneráveis porque:</h4>
+                <div class="opcoes-resposta">
+                    <label><input type="radio" name="q3" value="sist_viar" required><span>Utilizam menos o sistema
+                            viário</span></label>
+                    <label><input type="radio" name="q3" value="desresp"><span>Desrespeitam mais as leis de
+                            trânsito</span></label>
+                    <label><input type="radio" name="q3" value="expos"><span>Estão mais expostos fisicamente em caso de
+                            sinistro</span></label>
+                    <label><input type="radio" name="q3" value="hab"><span>Não possuem habilitação</span></label>
+                    <label><input type="radio" name="q3" value="urban"><span>Circulam apenas em áreas
+                            urbanas</span></label>
+                </div>
+            </div>
+            <div class="pergunta" data-question="q4">
+                <h4 class="font-semibold text-lg text-gray-700 mb-3">4. O uso do celular ao dirigir é perigoso
+                    principalmente porque:</h4>
+                <div class="opcoes-resposta">
+                    <label><input type="radio" name="q4" value="visu" required><span>Afeta apenas a atenção
+                            visual</span></label>
+                    <label><input type="radio" name="q4" value="manual"><span>Afeta apenas a atenção
+                            manual</span></label>
+                    <label><input type="radio" name="q4" value="audit"><span>Afeta apenas a atenção
+                            auditiva</span></label>
+                    <label><input type="radio" name="q4" value="visu_man_cog"><span>Compromete a atenção visual, manual
+                            e cognitiva ao mesmo tempo</span></label>
+                    <label><input type="radio" name="q4" value="alt_vel"><span>Só é perigoso em altas
+                            velocidades</span></label>
+                </div>
+            </div>
+            <div class="pergunta" data-question="q5">
+                <h4 class="font-semibold text-lg text-gray-700 mb-3">5. Em relação à velocidade e gravidade dos
+                    sinistros, é correto afirmar que:</h4>
+                <div class="opcoes-resposta">
+                    <label><input type="radio" name="q5" value="temp_viag" required><span>A velocidade influencia apenas
+                            o tempo de viagem</span></label>
+                    <label><input type="radio" name="q5" value="nao_alt"><span>A velocidade não altera o tempo de
+                            viagem</span></label>
+                    <label><input type="radio" name="q5" value="maior_vel"><span>Quanto maior a velocidade, maior a
+                            chance de lesões graves e fatais</span></label>
+                    <label><input type="radio" name="q5" value="tipo_veic"><span>O risco depende apenas do tipo de
+                            veículo</span></label>
+                    <label><input type="radio" name="q5" value="infra"><span>A infraestrutura elimina o risco da
+                            velocidade</span></label>
+                </div>
+            </div>
+            <div class="pergunta" data-question="q6">
+                <h4 class="font-semibold text-lg text-gray-700 mb-3">6. Qual equipamento de proteção individual tem
+                    maior impacto comprovado na redução de mortes de motociclistas?</h4>
+                <div class="opcoes-resposta">
+                    <label><input type="radio" name="q6" value="jaq" required><span>Jaqueta com proteção</span></label>
+                    <label><input type="radio" name="q6" value="luva"><span>Luvas</span></label>
+                    <label><input type="radio" name="q6" value="botas"><span>Botas</span></label>
+                    <label><input type="radio" name="q6" value="calca"><span>Calça reforçada</span></label>
+                    <label><input type="radio" name="q6" value="capac"><span>Capacete de qualidade, preferencialmente
+                            integral </span></label>
+                </div>
+            </div>
+            <div class="pergunta" data-question="q7">
+                <h4 class="font-semibold text-lg text-gray-700 mb-3">7. A percepção de risco no trânsito pode ser
+                    definida como:</h4>
+                <div class="opcoes-resposta">
+                    <label><input type="radio" name="q7" value="medo_dirigir" required><span>Medo constante de
+                            dirigir</span></label>
+                    <label><input type="radio" name="q7" value="con_teor"><span>Conhecimento teórico das
+                            leis</span></label>
+                    <label><input type="radio" name="q7" value="intuic_indiv"><span>Intuição individual do
+                            condutor</span></label>
+                    <label><input type="radio" name="q7" value="recon_perig"><span>Capacidade de reconhecer perigos e
+                            decidir corretamente para evitá-los</span></label>
+                    <label><input type="radio" name="q7" value="exp"><span>Experiência adquirida apenas com o
+                            tempo</span></label>
+                </div>
+            </div>
+            <div class="pergunta" data-question="q8">
+                <h4 class="font-semibold text-lg text-gray-700 mb-3">8. Na abordagem educativa defendida pelo
+                    Observatório, aprender a conduzir com segurança significa:</h4>
+                <div class="opcoes-resposta">
+                    <label><input type="radio" name="q8" value="dec" required><span>Decorar regras para a
+                            prova</span></label>
+                    <label><input type="radio" name="q8" value="rep_comp"><span>Repetir comportamentos
+                            padronizados</span></label>
+                    <label><input type="radio" name="q8" value="prioriz"><span>Priorizar apenas aulas
+                            teóricas</span></label>
+                    <label><input type="radio" name="q8" value="constr"><span>Construir conhecimento a partir da
+                            experiência, reflexão e prática</span></label>
+                    <label><input type="radio" name="q8" value="punic"><span>Focar apenas em punições e
+                            multas</span></label>
+                </div>
+            </div>
+            <div class="pergunta" data-question="q9">
+                <h4 class="font-semibold text-lg text-gray-700 mb-3">9. Qual comportamento está diretamente associado à
+                    redução de mortes e lesões no trânsito?</h4>
+                <div class="opcoes-resposta">
+                    <label><input type="radio" name="q9" value="pressa" required><span>Aumentar a pressa para
+                            reduzir o tempo de exposição</span></label>
+                    <label><input type="radio" name="q9" value="parada"><span>Usar o celular em paradas
+                            rápidas</span></label>
+                    <label><input type="radio" name="q9" value="habilidade"><span>Confiar apenas na própria
+                            habilidade</span></label>
+                    <label><input type="radio" name="q9" value="via_vaz"><span>Ignorar limites quando a via
+                            está vazia</span></label>
+                    <label><input type="radio" name="q9" value="atenc"><span>Respeitar os limites de
+                            velocidade e manter atenção plena </span></label>
+                </div>
+            </div>
+            <div class="pergunta" data-question="q10">
+                <h4 class="font-semibold text-lg text-gray-700 mb-3">10. Quando falamos que “mobilidade não é sobre
+                    vias, é sobre vidas”, reforçamos a ideia de que:</h4>
+                <div class="opcoes-resposta">
+                    <label><input type="radio" name="q10" value="infrae" required><span>A infraestrutura é mais
+                            importante que as pessoas</span></label>
+                    <label><input type="radio" name="q10" value="tec"><span>O trânsito é apenas um problema
+                            técnico</span></label>
+                    <label><input type="radio" name="q10" value="historia"><span>Cada usuário do trânsito é uma pessoa
+                            com história, família e responsabilidades</span></label>
+                    <label><input type="radio" name="q10" value="inev"><span>Os sinistros são inevitáveis</span></label>
+                    <label><input type="radio" name="q10" value="err_hum"><span>O erro humano é a única causa dos
+                            acidentes</span></label>
+                </div>
+            </div>
 
-        <div id="hidden-fields"></div>
+            <div class="pergunta">
+                <h4 class="font-semibold text-lg text-gray-700 mb-3">11. O que você considera mais importante para
+                    termos um trânsito seguro nos próximos 10 anos?</h4>
+                <div><textarea name="respostaQ11" id="q11" rows="4" class="w-full p-3 border rounded-lg"
+                        placeholder="Digite sua resposta aqui..." required></textarea></div>
+            </div>
 
-        <button type="submit" class="btn-submit">Enviar Respostas</button>
-    </form>
-</div>
+            <div id="hidden-fields"></div>
 
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-    // COLE AQUI A SUA URL DO WEB APP (A MESMA DO OUTRO QUESTIONÁRIO)
-    const WEB_APP_URL = 'https://script.google.com/a/macros/onsv.org.br/s/AKfycbyn6VGsEVv3Uv0Q26oOdTF91Za1tvlfWsuWrNoBXYiuZn6kRSUdxKhttt6Yy6Zt3Mtrjw/exec';
+            <button type="submit" class="btn-submit">Enviar Respostas</button>
+        </form>
+    </div>
 
-    const form = document.getElementById('autoavaliacao-form');
-    form.action = WEB_APP_URL; 
-    
-    // GABARITO CORRETO PARA O QUESTIONÁRIO 2
-    const correctAnswers = {
-        q1: 'excesso-velocidade',
-        q2: 'nao-usar-capacete',
-        q3: 'reducao-20',
-        q4: '75',
-        q5: 'reducao-30kmh',
-        q6: 'ambos',
-        q7: 'mais-70',
-        q8: '5-vezes',
-        q9: 'eliminar-mortes',
-        q10: 'reduzir-velocidade-chuva'
-    };
-    
-    form.addEventListener('submit', function(event) {
-        event.preventDefault(); 
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // COLE AQUI A SUA URL DO WEB APP (A MESMA DO OUTRO QUESTIONÁRIO)
+            const WEB_APP_URL = 'https://script.google.com/a/macros/onsv.org.br/s/AKfycbyn6VGsEVv3Uv0Q26oOdTF91Za1tvlfWsuWrNoBXYiuZn6kRSUdxKhttt6Yy6Zt3Mtrjw/exec';
 
-        if (!form.checkValidity()) {
-            alert('Por favor, responda a todas as perguntas para continuar.');
-            return;
-        }
+            const form = document.getElementById('autoavaliacao-form');
+            form.action = WEB_APP_URL;
 
-        form.querySelector('.btn-submit').disabled = true;
-        form.querySelector('.btn-submit').textContent = 'Enviando...';
-        
-        let score = 0;
-        Object.keys(correctAnswers).forEach(key => {
-            const selected = form.querySelector(`input[name="${key}"]:checked`);
-            if (selected && selected.value === correctAnswers[key]) score++;
+            // GABARITO CORRETO PARA O QUESTIONÁRIO 2
+            const correctAnswers = {
+                q1: 'exce_vel',
+                q2: 'comparti',
+                q3: 'expos',
+                q4: 'visu_man_cog',
+                q5: 'maior_vel',
+                q6: 'capac',
+                q7: 'recon_perig',
+                q8: 'constr',
+                q9: 'atenc',
+                q10: 'historia'
+            };
+
+            form.addEventListener('submit', function (event) {
+                event.preventDefault();
+
+                if (!form.checkValidity()) {
+                    alert('Por favor, responda a todas as perguntas para continuar.');
+                    return;
+                }
+
+                form.querySelector('.btn-submit').disabled = true;
+                form.querySelector('.btn-submit').textContent = 'Enviando...';
+
+                let score = 0;
+                Object.keys(correctAnswers).forEach(key => {
+                    const selected = form.querySelector(`input[name="${key}"]:checked`);
+                    if (selected && selected.value === correctAnswers[key]) score++;
+                });
+
+                const urlParams = new URLSearchParams(window.location.search);
+
+                const hiddenFieldsContainer = document.getElementById('hidden-fields');
+                const dadosParaEnviar = {
+                    questionarioTipo: 2, // <-- ALTERADO PARA 2
+                    pontuacao: score,
+                    nome: urlParams.get('nome') || '',
+                    cpf: urlParams.get('cpf') || '',
+                    email: urlParams.get('email') || '',
+                    cidade: urlParams.get('cidade') || '',
+                    estado: urlParams.get('estado') || '',
+                    van: urlParams.get('van') || ''
+                };
+
+                for (const key in dadosParaEnviar) {
+                    const input = document.createElement('input');
+                    input.type = 'hidden';
+                    input.name = key;
+                    input.value = dadosParaEnviar[key];
+                    hiddenFieldsContainer.appendChild(input);
+                }
+
+                form.submit();
+            });
         });
-        
-        const urlParams = new URLSearchParams(window.location.search);
-        
-        const hiddenFieldsContainer = document.getElementById('hidden-fields');
-        const dadosParaEnviar = {
-            questionarioTipo: 2, // <-- ALTERADO PARA 2
-            pontuacao: score,
-            nome: urlParams.get('nome') || '',
-            cpf: urlParams.get('cpf') || '',
-            email: urlParams.get('email') || '',
-            cidade: urlParams.get('cidade') || '',
-            estado: urlParams.get('estado') || '',
-            van: urlParams.get('van') || ''
-        };
-
-        for (const key in dadosParaEnviar) {
-            const input = document.createElement('input');
-            input.type = 'hidden';
-            input.name = key;
-            input.value = dadosParaEnviar[key];
-            hiddenFieldsContainer.appendChild(input);
-        }
-
-        form.submit();
-    });
-});
-</script>
+    </script>
 
 </body>
+
 </html>
