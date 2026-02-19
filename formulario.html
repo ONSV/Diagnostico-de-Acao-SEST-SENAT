@@ -130,7 +130,7 @@
 
                 estados.forEach(estado => {
                     const option = document.createElement("option");
-                    option.value = estado.id;
+                    option.value = estado.sigla;
                     option.textContent = estado.nome;
                     selectEstado.appendChild(option);
                 });
